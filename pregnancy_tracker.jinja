@@ -1,12 +1,18 @@
-{% include 'due_date.jinja' %}
-{% include 'trimester.jinja' %}
-{% include 'verywell_family.jinja' %}
-{% include 'fetus_size/calc.jinja' %}
-{% include 'fetus_size/cravings.jinja' %}
-{% include 'fetus_size/development.jinja' %}
-{% include 'fetus_size/dude_dad.jinja' %}
-{% include 'fetus_size/fruit.jinja' %}
-{% include 'fetus_size/geeky.jinja' %}
-{% include 'fetus_size/length.jinja' %}
-{% include 'fetus_size/manly.jinja' %}
-{% include 'fetus_size/weight.jinja' %}
+{% macro calc_due_date(last_period_entity_id) %}
+{% set last_period_date = states(last_period_entity_id) | as_datetime %}
+{% set due_date = last_period_date + timedelta(weeks=40) %}
+{{ due_date.strftime('%Y-%m-%d') }}
+{% endmacro %}
+
+{% macro calc_fetus_size(week_entity_id, offset_entity_id) %}
+{{ states(week_entity_id)|int + states(offset_entity_id)|int }}
+{% endmacro %}
+
+{% macro get_fetus_size_detail(size, i, dict) %}
+{{ dict[([i, size, 40]|sort)[1]] }}
+{% endmacro %}
+
+{% macro calc_trimester(week_entity_id) %}
+{% set x = (states(week_entity_id) | int) %}
+{{ 'First' if (x <= 12) else 'Second' if (x <= 28) else 'Third' }}
+{% endmacro %}
