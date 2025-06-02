@@ -1,11 +1,11 @@
-{% from 'calc.jinja' import 'calculate_size' %}
-{{ calculate_size(4, {
-  4: 'a DIP switch toggle.',
-  5: 'a Nerd.',
-  6: 'a Battleship peg.',
-  7: 'a face on a standard D20 die.',
-  8: 'a blue pill or a red pill. You choose.',
-  9: 'the One Ring.',
+{% macro get_size_detail(i) %}
+{% set sizes = {
+  4:  'a DIP switch toggle.',
+  5:  'a Nerd.',
+  6:  'a Battleship peg.',
+  7:  'a face on a standard D20 die.',
+  8:  'a blue pill or a red pill. You choose.',
+  9:  'the One Ring.',
   10: 'a golden snitch.',
   11: 'a LEGO minifigure.',
   12: 'a Minecraft pixel.',
@@ -37,4 +37,6 @@
   38: 'an Oscar statuette.',
   39: 'the body of a 4/4 violin.',
   40: 'Pikachu.'
-}) }}
+} %}
+{{ sizes[([4, i, 40]|sort)[1]] }}
+{% endmacro %}

@@ -1,11 +1,11 @@
-{% from 'calc.jinja' import 'calculate_size' %}
-{{ calculate_size(4, {
-  4: 'a BB.',
-  5: 'a match head.',
-  6: 'a kernel of popcorn.',
-  7: 'a cheerio.',
-  8: 'a 10mm socket.',
-  9: 'a guitar pick.',
+{% macro get_size_detail(i) %}
+{% set sizes = {
+  4:  'a BB.',
+  5:  'a match head.',
+  6:  'a kernel of popcorn.',
+  7:  'a cheerio.',
+  8:  'a 10mm socket.',
+  9:  'a guitar pick.',
   10: 'a lug nut.',
   11: 'a condom.',
   12: 'a jumbo marshmallow.',
@@ -37,4 +37,6 @@
   38: 'a Playmate lunch cooler.',
   39: 'a Galápagos Penguine.',
   40: 'a toolbox.'
-}) }}
+} %}
+{{ sizes[([4, i, 40]|sort)[1]] }}
+{% endmacro %}

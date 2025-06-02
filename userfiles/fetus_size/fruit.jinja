@@ -1,11 +1,11 @@
-{% from 'calc.jinja' import 'calculate_size' %}
-{{ calculate_size(4, {
-  4: 'Poppy Seed',
-  5: 'Orange Seed',
-  6: 'Sweet Pea',
-  7: 'Blueberry',
-  8: 'Raspberry',
-  9: 'Green Olive',
+{% macro get_size_detail(i) %}
+{% set sizes = {
+  4:  'Poppy Seed',
+  5:  'Orange Seed',
+  6:  'Sweet Pea',
+  7:  'Blueberry',
+  8:  'Raspberry',
+  9:  'Green Olive',
   10: 'Prune',
   11: 'Large Strawberry',
   12: 'Lime',
@@ -39,4 +39,6 @@
   40: 'Small Pumpkin',
   41: 'Pumpkin',
   42: 'Watermelon'
-}) }}
+} %}
+{{ sizes[([4, i, 40]|sort)[1]] }}
+{% endmacro %}

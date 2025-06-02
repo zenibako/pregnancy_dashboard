@@ -1,11 +1,11 @@
-{% from 'calc' import 'calculate_size' %}
-{{ calculate_size(4, {
-  4: 'Less than 0.04 ounces',
-  5: 'Less than 0.04 ounces',
-  6: 'Less than 0.04 ounces',
-  7: 'Less than 0.04 ounces',
-  8: '0.04 ounces',
-  9: '0.07 ounces',
+{% macro get_size_detail(i) %}
+{% set sizes = {
+  4:  'Less than 0.04 ounces',
+  5:  'Less than 0.04 ounces',
+  6:  'Less than 0.04 ounces',
+  7:  'Less than 0.04 ounces',
+  8:  '0.04 ounces',
+  9:  '0.07 ounces',
   10: '0.14 ounces',
   11: '1/4 ounce',
   12: '1/2 ounce',
@@ -37,4 +37,6 @@
   38: '6 3/4 pounds',
   39: '7 1/4 pounds',
   40: '7 3/4 pounds'
-}) }}
+} %}
+{{ sizes[([4, i, 40]|sort)[1]] }}
+{% endmacro %}

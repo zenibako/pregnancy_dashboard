@@ -1,11 +1,11 @@
-{% from 'calc.jinja' import 'calculate_size' %}
-{{ calculate_size(4, {
-  4: 'a 20 grit grain on a sheet of sandpaper',
-  5: 'the head on a common nail.',
-  6: 'a 6-32 screw.',
-  7: 'a dose of Viagra.',
-  8: 'a cufflink.',
-  9: 'a lug nut.',
+{% macro get_size_detail(i) %}
+{% set sizes = {
+  4:  'a 20 grit grain on a sheet of sandpaper',
+  5:  'the head on a common nail.',
+  6:  'a 6-32 screw.',
+  7:  'a dose of Viagra.',
+  8:  'a cufflink.',
+  9:  'a lug nut.',
   10: 'a poker chip.',
   11: 'a golf ball.',
   12: 'a scoop of protein powder.',
@@ -37,4 +37,6 @@
   38: 'a chopped firewood log.',
   39: 'a box of a dozen Krispy Kreme donuts.',
   40: 'a badass knights helmet.'
-}) }}
+} %}
+{{ sizes[([4, i, 40]|sort)[1]] }}
+{% endmacro %}

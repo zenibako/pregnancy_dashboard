@@ -1,4 +1,4 @@
-{% from 'fetus_size/calc.jinja' import 'calculate_size' %}
+{% macro get_ref_url(i) %}
 {% set pages = {
   1: '4158813',
   2: '4158819',
@@ -45,5 +45,6 @@
   39: '4159263',
   40: '4159264'
 } %}
-{% set x = calculate_size(1, pages) %}
+{% set x = pages[([1, i, 40]|sort)[1]] %}
 https://www.verywellfamily.com/{{x|string}}-weeks-pregnant-{{pages[x]}}
+{% endmacro %}

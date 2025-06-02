@@ -1,11 +1,11 @@
-{% from 'calc' import 'calculate_size' %}
-{{ calculate_size(4, {
-  4: 'Less than 3/4 inches',
-  5: 'Less than 3/4 inches',
-  6: 'Less than 3/4 inches',
-  7: 'Less than 3/4 inches',
-  8: '3/4 inches',
-  9: '1 inch',
+{% macro get_size_detail(i) %}
+{% set sizes = {
+  4:  'Less than 3/4 inches',
+  5:  'Less than 3/4 inches',
+  6:  'Less than 3/4 inches',
+  7:  'Less than 3/4 inches',
+  8:  '3/4 inches',
+  9:  '1 inch',
   10: '1 1/4 inches',
   11: '1 1/2 inches',
   12: '2 1/4 inches',
@@ -37,4 +37,6 @@
   38: '19 1/2 inches',
   39: '20 inches',
   40: '20 1/4 inches'
-}) }}
+} %}
+{{ sizes[([4, i, 40]|sort)[1]] }}
+{% endmacro %}

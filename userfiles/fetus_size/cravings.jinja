@@ -1,11 +1,11 @@
-{% from 'calc' import 'calculate_size' %}
-{{ calculate_size(4, {
-  4: 'a grain of table salt.',
-  5: 'a Pop Rocks crystal.',
-  6: 'a rainbow sprinkle.',
-  7: 'a Tic Tac.',
-  8: 'a peanut M&M.',
-  9: 'a tater tot.',
+{% macro get_size_detail(i) %}
+{% set sizes = {
+  4:  'a grain of table salt.',
+  5:  'a Pop Rocks crystal.',
+  6:  'a rainbow sprinkle.',
+  7:  'a Tic Tac.',
+  8:  'a peanut M&M.',
+  9:  'a tater tot.',
   10: 'a Ferrero Rocher.',
   11: 'a donut hole.',
   12: 'a chicken nugget.',
@@ -37,4 +37,6 @@
   38: 'a bucket of fried chicken.',
   39: 'a full rack of pork back ribs.',
   40: 'a 15 lb Thanksgiving turkey.'
-}) }}
+} %}
+{{ sizes[([4, i, 40]|sort)[1]] }}
+{% endmacro %}
