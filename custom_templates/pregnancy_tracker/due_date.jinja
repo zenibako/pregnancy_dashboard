@@ -1,0 +1,3 @@
+{% set last_period_date = states('input_datetime.pregnancy_last_period') | as_datetime %}
+{% set due_date = last_period_date + timedelta(weeks=40) %}
+{{ due_date.strftime('%Y-%m-%d') }}

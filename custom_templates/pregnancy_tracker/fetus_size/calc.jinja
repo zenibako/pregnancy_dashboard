@@ -1,0 +1,3 @@
+{% macro calculate_size(i, sizes) %}
+{{ sizes[([i, (states('sensor.pregnancy_weeks')|int + states("input_number.pregnancy_size_offset")|int), 40]|sort)[1]] }}
+{% endmacro %}

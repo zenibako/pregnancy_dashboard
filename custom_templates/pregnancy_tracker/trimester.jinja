@@ -1,0 +1,2 @@
+{% set x = (states('sensor.pregnancy') | int) %}
+{{ 'First' if x <= 12 else ( 'Second' if x <=28 else 'Third' ) }}
