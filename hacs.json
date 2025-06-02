@@ -1,4 +1,5 @@
 {
     "name": "Pregnancy Tracker",
+    "filename": "trimester.jinja",
     "render_readme": true
 }
