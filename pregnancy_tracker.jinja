@@ -1,9 +1,3 @@
-{% macro calc_due_date(last_period_entity_id) %}
-{% set last_period_date = states(last_period_entity_id) | as_datetime %}
-{% set due_date = last_period_date + timedelta(weeks=40) %}
-{{ due_date.strftime('%Y-%m-%d') }}
-{% endmacro %}
-
 {% macro calc_fetus_size(week_entity_id, offset_entity_id) %}
 {{ states(week_entity_id)|int + states(offset_entity_id)|int }}
 {% endmacro %}

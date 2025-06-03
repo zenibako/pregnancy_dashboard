@@ -1,0 +1,2 @@
+sensor    pregnancy_sensors:    !include "pregnancy/sensors.yaml"
+template  pregnancy_templates:  !include "pregnancy/templates.yaml"

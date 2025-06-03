@@ -1,0 +1,7 @@
+input_number:
+  pregnancy_size_offset:
+    name: Pregnancy size offset
+    max: 42
+    min: -42
+    step: 1
+    mode: box
