@@ -1,6 +1,6 @@
 - name: Pregnancy Due Date
   state: >
-    {% set last_period_date = states('sensor.pregnancy_due_date') | as_datetime %}
+    {% set last_period_date = states('input_datetime.pregnancy_last_period') | as_datetime %}
     {% set due_date = last_period_date + timedelta(weeks=40) %}
     {{ due_date.strftime('%Y-%m-%d') }}
 # - name: "Pregnancy Next Check"

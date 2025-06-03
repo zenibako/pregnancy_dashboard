@@ -1,6 +1,0 @@
-{
-    "name": "Pregnancy Tracker",
-    "filename": "pregnancy_tracker.jinja",
-    "persistent_directory": "userfiles",
-    "render_readme": true
-}
