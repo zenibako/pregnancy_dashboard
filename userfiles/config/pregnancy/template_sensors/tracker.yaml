@@ -1,36 +1,35 @@
 - name: Pregnancy
-  state: |
+  state: >
     {{ states('sensor.pregnancy_days') | int // 7 }}
   attributes:
-    day_in_week: | # This calculates day of the week between 0 and 6, following U.S. healthcare standards.
+    day_in_week: > # This calculates day of the week between 0 and 6, following U.S. healthcare standards.
       {{ states('sensor.pregnancy_days') | int % 7 }}
-    trimester: |
+    trimester: >
       {% set x = (states('sensor.pregnancy_weeks') | int) %}
       {{ 'First' if (x <= 12) else 'Second' if (x <= 28) else 'Third' }}
-    days: |
+    days: >
       {{ states('sensor.pregnancy_days') }}
-    months: |
+    months: >
       {{ ((states('sensor.pregnancy_days') | int) / 30.5) | round(1, 'half') }}
-    percent: |
+    percent: >
       {{ states('sensor.pregnancy_percent') }}
-    size: |
-      {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
-      {{ calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset') }}
-    size_details: |
-      {% from 'userfiles/templates/fruit.jinja' import 'get_size_details' }
-      {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
-      {% set size = calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset')}
-      {{ get_size_details(size) }}
-    size_image_url: |
-      {% from 'userfiles/templates/fruit.jinja' import 'get_image_url' }
-      {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
-      {% set size = calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset')}
-      {{ get_image_url(size) }}
-    size_ref_url: |
-      {% from 'userfiles/templates/fruit.jinja' import 'get_ref_url' }
-      {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
-      {% set size = calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset')}
-      {{ get_ref_url(size) }}
+    size: >
+      {{ states('sensor.pregnancy_size') }}
+    # size_details: |
+    #   {% from 'userfiles/templates/fruit.jinja' import 'get_size_details' }
+    #   {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
+    #   {% set size = calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset')}
+    #   {{ get_size_details(size) }}
+    # size_image_url: |
+    #   {% from 'userfiles/templates/fruit.jinja' import 'get_image_url' }
+    #   {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
+    #   {% set size = calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset')}
+    #   {{ get_image_url(size) }}
+    # size_ref_url: |
+    #   {% from 'userfiles/templates/fruit.jinja' import 'get_ref_url' }
+    #   {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
+    #   {% set size = calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset')}
+    #   {{ get_ref_url(size) }}
     # fetus_size_image: |
     #   https://images.agoramedia.com/wte3.0/gcms/wbw_squares_baby_wk_{{ states('sensor.pregnancy_weeks') }}.jpg
     # fetus_size_fruit_image: |

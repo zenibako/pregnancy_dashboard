@@ -1,12 +1,15 @@
-- name: Pregnancy Fetal Length
-  state: |
-    {% from 'userfiles/fetus_size/height.jinja' import 'get_size_details' }
-    {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
-    {% set size = calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset')}
-    {{ get_size_details(size) }}
-- name: Pregnancy Fetal Weight
-  state: |
-    {% from 'userfiles/fetus_size/weight.jinja' import 'get_size_details' }
-    {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
-    {% set size = calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset')}
-    {{ get_size_details(size) }}
+- name: Pregnancy Size
+  state: >
+    {{ states('sensor.pregnancy_weeks')|int + states('input_number.pregnancy_size_offset')|int }}
+# - name: Pregnancy Fetal Length
+#   state: |
+#     {% from 'userfiles/fetus_size/height.jinja' import 'get_size_details' }
+#     {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
+#     {% set size = calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset')}
+#     {{ get_size_details(size) }}
+# - name: Pregnancy Fetal Weight
+#   state: |
+#     {% from 'userfiles/fetus_size/weight.jinja' import 'get_size_details' }
+#     {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
+#     {% set size = calc_fetus_size('sensor.pregnancy_weeks', 'input_number.pregnancy_size_offset')}
+#     {{ get_size_details(size) }}
