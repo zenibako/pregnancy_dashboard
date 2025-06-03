@@ -10,6 +10,14 @@
   unit_of_measurement: "days"
   state: >
     {{ (now() - states('input_datetime.pregnancy_last_period') | as_datetime | as_local).days }}
+- name: Pregnancy Weeks
+  unit_of_measurement: "weeks"
+  state: >
+    {{ states('sensor.pregnancy_days') | int // 7 }}
+- name: Pregnancy Day in Week
+  unit_of_measurement: "days"
+  state: >
+    {{ states('sensor.pregnancy_days') | int % 7 }}
 - name: Pregnancy Days Left
   unit_of_measurement: "days"
   state: >
