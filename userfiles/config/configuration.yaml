@@ -1,2 +1,7 @@
-sensor    pregnancy_sensors:    !include "pregnancy/sensors.yaml"
-template  pregnancy_templates:  !include "pregnancy/templates.yaml"
+input_datetime  pregnancy_input_datetimes:  !include "pregnancy/input_datetimes.yaml"
+input_number    pregnancy_input_numbers:    !include "pregnancy/input_numbers.yaml"
+sensor          pregnancy_sensors:          !include "pregnancy/sensors.yaml"
+
+# [Need a slightly different approach for `template` top-level keys.](https://github.com/home-assistant/core/issues/118182#issue-2317859609)
+template:
+  - sensor: !include_dir_merge_list "pregnancy/template_sensors"

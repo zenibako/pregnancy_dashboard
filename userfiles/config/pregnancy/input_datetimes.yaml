@@ -1,0 +1,4 @@
+pregnancy_last_period:
+  friendly_name: First Day of Last Period
+  date: true
+  time: false
