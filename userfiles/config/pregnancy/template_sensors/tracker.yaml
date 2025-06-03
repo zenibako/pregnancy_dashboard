@@ -2,7 +2,7 @@
   state: |
     {{ states('sensor.pregnancy_days') | int // 7 }}
   attributes:
-    day_in_week: |
+    day_in_week: | # This calculates day of the week between 0 and 6, following U.S. healthcare standards.
       {{ states('sensor.pregnancy_days') | int % 7 }}
     trimester: |
       {% set x = (states('sensor.pregnancy_weeks') | int) %}
