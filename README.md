@@ -8,6 +8,7 @@ This was originally posted on a [Home Assistant Community Post](https://communit
 - [custom:text-action-element](https://github.com/custom-cards/text-action-element)
 - [custom:card-templater](https://github.com/gadgetchnnel/lovelace-card-templater)
 - [custom:gallery-card](https://github.com/TarheelGrad1998/gallery-card).
+
 The code is a single dashboard view that can be added to an existing dashboard.
 
 <br><br />
