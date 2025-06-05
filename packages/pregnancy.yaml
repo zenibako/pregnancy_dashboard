@@ -1,6 +1,10 @@
-###########################
+############################
 ### Pregnancy Dashboard ###
 ###########################
+
+##############
+### Inputs ###
+##############
 
 input_datetime:
   pregnancy_last_period:
@@ -16,23 +20,41 @@ input_number:
     step: 1
     mode: box
 
+##########################
+### Personal Baby Pics ###
+##########################
+
 sensor:
   - platform: folder
     folder: /config/www/baby
 
+########################
+### Template Sensors ###
+########################
+
 template:
   - sensor:
 
-    # Time
+#######################
+### Important Dates ###
+#######################
 
     - name: Pregnancy Due Date
       state: >
         {% set last_period_date = states('input_datetime.pregnancy_last_period') | as_datetime %}
         {% set due_date = last_period_date + timedelta(weeks=40) %}
         {{ due_date.strftime('%Y-%m-%d') }}
+
+    ### If you want to implement this, add a new calendar entity with ID `baby_calendar`.
+    #
     # - name: "Pregnancy Next Check"
     #   state: |
     #     {{ state_attr('calendar.baby_calendar', 'start_time') | as_timestamp | timestamp_custom('%-I:%M%p on %a, %B %d') }}"
+
+#######################
+### Progess Metrics ###
+#######################
+
     - name: Pregnancy Days # Total accumulated days while pregnant.
       unit_of_measurement: "days"
       state: >
@@ -53,12 +75,16 @@ template:
       unit_of_measurement: "%"
       state: >
         {{ (((states('sensor.pregnancy_days') | int)*100) / ((states('sensor.pregnancy_days') | int)+(states('sensor.pregnancy_days_left') | int))) | int }}
-
-    # Size
-
     - name: Pregnancy Size
       state: >
         {{ states('sensor.pregnancy_weeks')|int + states('input_number.pregnancy_size_offset')|int }}
+
+###############
+### Tracker ###
+###############
+
+    ### TODO: Fix templates.
+    #
     # - name: Pregnancy Fetal Length
     #   state: >
     #     {% from 'pregnancy/height.jinja' import 'get_size_detail' }
@@ -70,12 +96,12 @@ template:
 
     # Tracker
   
-    - name: Pregnancy
+    - name: Pregnancy Tracker
       state: >
         {{ states('sensor.pregnancy_weeks') }}
       attributes:
         day_in_week: > # This calculates day of the week between 0 and 6, following U.S. healthcare standards.
-          {{ states('sensor.pregnancy_days') | int % 7 }}
+          {{ states('sensor.pregnancy_day_of_week') }}
         trimester: >
           {% set x = (states('sensor.pregnancy_weeks') | int) %}
           {{ 'First' if (x <= 12) else 'Second' if (x <= 28) else 'Third' }}
@@ -87,6 +113,9 @@ template:
           {{ states('sensor.pregnancy_percent') }}
         size: >
           {{ states('sensor.pregnancy_size') }}
+
+        ### TODO: Fix templates.
+	#
         # size_details: |
         #   {% from 'userfiles/templates/fruit.jinja' import 'get_size_details' }
         #   {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
@@ -136,5 +165,4 @@ template:
         #   https://www.mayoclinic.org/healthy-lifestyle/pregnancy-week-by-week/in-depth/hlv-20049471
         # fetal_development: |
         #   {% include 'userfiles/templates/development.jinja' %}
-    
-     
+
