@@ -1,0 +1,24 @@
+###########################
+### Pregnancy Dashboard ###
+###########################
+
+pregnancy_tracker:
+  input_datetime:
+    pregnancy_last_period:
+      name: First Day of Last Period
+      has_date: true
+      has_time: false
+  input_number:
+    pregnancy_size_offset:
+      name: Pregnancy size offset
+      max: 42
+      min: -42
+      step: 1
+      mode: box
+  sensor:
+    - platform: folder
+      folder: /config/www/baby
+  
+  # [Need a slightly different approach for `template` top-level keys.](https://github.com/home-assistant/core/issues/118182#issue-2317859609)
+  template:
+    - sensor: !include_dir_merge_list "template_sensors"
