@@ -1,7 +1,3 @@
-############################
-### Pregnancy Dashboard ###
-###########################
-
 ##############
 ### Inputs ###
 ##############
@@ -79,10 +75,6 @@ template:
       state: >
         {{ states('sensor.pregnancy_weeks')|int + states('input_number.pregnancy_size_offset')|int }}
 
-###############
-### Tracker ###
-###############
-
     ### TODO: Fix templates.
     #
     # - name: Pregnancy Fetal Length
@@ -94,8 +86,10 @@ template:
     #     {% from 'pregnancy/weight.jinja' import 'get_size_detail' }
     #     {{ get_size_detail(states('sensor.pregnancy_size')) }}
 
-    # Tracker
-  
+###############
+### Tracker ###
+###############
+
     - name: Pregnancy Tracker
       state: >
         {{ states('sensor.pregnancy_weeks') }}
@@ -115,7 +109,7 @@ template:
           {{ states('sensor.pregnancy_size') }}
 
         ### TODO: Fix templates.
-	#
+        #
         # size_details: |
         #   {% from 'userfiles/templates/fruit.jinja' import 'get_size_details' }
         #   {% from 'pregnancy_tracker.jinja' import 'calc_fetus_size' %}
