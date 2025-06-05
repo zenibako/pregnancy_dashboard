@@ -59,14 +59,14 @@ template:
     - name: Pregnancy Size
       state: >
         {{ states('sensor.pregnancy_weeks')|int + states('input_number.pregnancy_size_offset')|int }}
-    - name: Pregnancy Fetal Length
-      state: >
-        {% from 'pregnancy/height.jinja' import 'get_size_detail' }
-        {{ get_size_detail(states('sensor.pregnancy_size')) }}
-    - name: Pregnancy Fetal Weight
-      state: >
-        {% from 'pregnancy/weight.jinja' import 'get_size_detail' }
-        {{ get_size_detail(states('sensor.pregnancy_size')) }}
+    # - name: Pregnancy Fetal Length
+    #   state: >
+    #     {% from 'pregnancy/height.jinja' import 'get_size_detail' }
+    #     {{ get_size_detail(states('sensor.pregnancy_size')) }}
+    # - name: Pregnancy Fetal Weight
+    #   state: >
+    #     {% from 'pregnancy/weight.jinja' import 'get_size_detail' }
+    #     {{ get_size_detail(states('sensor.pregnancy_size')) }}
 
     # Tracker
   
@@ -137,3 +137,4 @@ template:
         # fetal_development: |
         #   {% include 'userfiles/templates/development.jinja' %}
     
+     
